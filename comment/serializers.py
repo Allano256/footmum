@@ -9,7 +9,7 @@ class CommentSeializer(serializers.ModelSerializer):
     owner= serializers.ReadOnlyField(source='owner.username')
 
 
-    def get_owner(self, obj):
+    def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
     

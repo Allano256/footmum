@@ -1,12 +1,17 @@
 from rest_framework import serializers
 from .models import Broadcast
+from like.models import Likes
 
 
 class BroadcastSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    # is_owner = serializers.SerializerMethodField()
-    # profile_id =serializers.ReadOnlyField(source='owner.profile.id')
-    # profile_image = serializers.ReadOnlyField(source='owner.post.image.url')
+    is_owner = serializers.SerializerMethodField()
+    profile_id =serializers.ReadOnlyField(source='owner.bio.id')
+    profile_image = serializers.ReadOnlyField(source='owner.broadcast.image.url')
+    like_id = serializers.SerializerMethodField()
+
+    comments_count= serializers.ReadOnlyField()
+    likes_count=serializers.ReadOnlyField()
 
     """
     Set the size of the image.
@@ -25,13 +30,25 @@ class BroadcastSerializer(serializers.ModelSerializer):
                 'Image height is larger than 4096px'
             )
         
-    def get_object(self,obj):
+    def get_is_owner(self,obj):
         request = self.context['request']
         return request.user == obj.owner
+    
+    def get_like_id(self,obj):
+        """
+        Get current user from context and check if the user is authenticated.
+        """
+        user = self.context['request'].user
+        if user.is_authenticated:
+            like= Likes.objects.filter(
+                owner=user, broadcast=obj
+            ).first()
+            return like.id if like else None
+        return None
     
     class Meta:
         model= Broadcast
         fields = [
-             'id','owner','created_at','updated_at','title','content', 'image','image_filter',
+             'id','owner','created_at','updated_at','title','is_owner','content', 'image','image_filter','profile_image','like_id','comments_count','likes_count','profile_id'
         ]
     
