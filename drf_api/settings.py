@@ -21,6 +21,8 @@ CLOUDINARYSTORAGE ={
     os.environ.get('CLOUDINARY_URL')
 }
 
+DEBUG ='DEV' in os.environ
+
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -59,6 +61,7 @@ REST_AUTH_SERIALIZERS={
 }
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -66,7 +69,7 @@ REST_AUTH_SERIALIZERS={
 SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com',  '127.0.0.1']
 
