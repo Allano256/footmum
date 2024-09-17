@@ -21,10 +21,6 @@ CLOUDINARYSTORAGE ={
     os.environ.get('CLOUDINARY_URL')
 }
 
-os.environ['DEV'] = '1'
-
-
-
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -62,6 +58,7 @@ JWT_AUTH_SAMESITE = 'None'
 REST_AUTH_SERIALIZERS={
     'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
 }
+
 
 
 # Quick-start development settings - unsuitable for production
