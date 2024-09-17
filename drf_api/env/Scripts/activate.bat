@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\allan\OneDrive\Desktop\footmum\footmum\drf_api\env
+set VIRTUAL_ENV=C:\Users\allan\OneDrive\Desktop\footmum\footmum-2\drf_api\env
 
 if not defined PROMPT set PROMPT=$P$G
 
